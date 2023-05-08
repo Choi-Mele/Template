@@ -1,0 +1,4 @@
+@charset "euc-kr";
+
+@import url("main.css"); /*  utf ==> euc-kr 로 변환하여 index.html 에 export 함 */
+

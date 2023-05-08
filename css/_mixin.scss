@@ -1,0 +1,134 @@
+@mixin pos-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+}//pos-center
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}//flex-center
+
+@mixin flex-bet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}//flex-center
+
+@mixin flex-center-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}//flex-center-col
+
+@mixin flex-start-col {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}//flex-center-col
+
+@mixin img-set{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@mixin img-set-con{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+
+@mixin button-default {
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(#333,0.4);
+}//button-default
+
+@mixin modal-default {
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%; height: 100%;
+  background-color: rgba(#333,0.8);
+  z-index: 1;
+
+  .contents{
+    width: 95%;
+    max-width: 700px;    
+    z-index: 2;
+
+    .title{
+      @include title2;
+    }
+  }
+}//modal-default
+
+// 반응형 분기점
+
+@mixin over_container {
+  @media (min-width: #{$container-width}) {
+    @content;
+  }
+}
+
+@mixin container {
+  @media (max-width: #{$container-width}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: #{$breakpoint-pc - 1px}) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+// 320px 까지 맞출시 사용
+@mixin smallest {
+  @media (min-width:#{$breakpoint-smallest}) and (max-width:#{$breakpoint-mobile - 1px}) {
+    @content;
+  }
+}
+
+
+
+/* 마진 바텀과 패딩 탑/바텀을 모바일 화면에서
+   자동으로 1/2로 줄어드는 믹스인입니다.
+   반드시 사용할 필요는 없지만
+   인클루드해서 사용시, 반응형에서 편리하니 참고해주세요 */
+
+// margin-bottom
+@mixin mb($margin-bottom) {
+  margin-bottom: $margin-bottom;
+
+  @include mobile {
+    margin-bottom: calc($margin-bottom / 2);
+  }
+}
+
+// padding
+@mixin pd-top-bottom($top, $bottom) {
+  padding: {
+    top: $top;
+    bottom: $bottom;
+  }
+
+  @include mobile {
+    padding: {
+      top: calc($top / 2);
+      bottom: calc($bottom / 2);
+    }
+  }
+}
+
